@@ -6,7 +6,7 @@ tests:
     image: daedalusproject/base_deb_golang_builder
     before_script:
       - mkdir -p github.com/a-castellano/$CI_PROJECT_NAMESPACE
-      - cd gitlab.com/$CI_PROJECT_NAMESPACE
+      - cd github.com/a-castellano/$CI_PROJECT_NAMESPACE
       - ln -s $CI_PROJECT_DIR
       - cd $CI_PROJECT_NAME
     script:
