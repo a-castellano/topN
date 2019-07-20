@@ -5,4 +5,5 @@ tests:
     stage: test
     image: daedalusproject/base_deb_golang_builder
     script:
-      - ls
+      - export GOPATH=$(pwd)
+      - go test -short $(go list ./... | grep -v /vendor/)
