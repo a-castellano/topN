@@ -5,9 +5,9 @@ tests:
     stage: test
     image: daedalusproject/base_deb_golang_builder
     before_script:
-      - echo "---> $CI_PROJECT_NAMESPACE"
-      - mkdir -p github.com/a-castellano/$CI_PROJECT_NAMESPACE
-      - cd github.com/a-castellano/$CI_PROJECT_NAMESPACE
+      - export GOPATH=$(pwd)
+      - mkdir -p github.com/$CI_PROJECT_NAMESPACE
+      - cd github.com/$CI_PROJECT_NAMESPACE
       - ln -s $CI_PROJECT_DIR
       - cd $CI_PROJECT_NAME
     script:
