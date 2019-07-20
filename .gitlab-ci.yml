@@ -4,6 +4,13 @@ stages:
 tests:
     stage: test
     image: daedalusproject/base_deb_golang_builder
+    before_script:
+      - cd $GOPATH/src
+      - mkdir -p gitlab.com/$CI_PROJECT_NAMESPACE
+      - cd gitlab.com/$CI_PROJECT_NAMESPACE
+      - ln -s $CI_PROJECT_DIR
+      - cd $CI_PROJECT_NAME
     script:
-      - export GOPATH=$(pwd)
+      - pwd
+      - ls -l
       - go test -short $(go list ./... | grep -v /vendor/)
