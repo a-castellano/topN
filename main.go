@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"container/heap"
 	"fmt"
+	"github.com/a-castellano/topN/top"
 	"log"
 	"os"
 	"strconv"
@@ -35,7 +35,7 @@ func processFile(filename string, numberOfResults int, maxHeap *IntHeap) {
 func main() {
 
 	args := os.Args[1:]
-	maxHeap := &IntHeap{}
+	top := TopN
 
 	if len(args) != 2 {
 		log.Fatal("You must supply a file to process and a number of results to display.")
@@ -43,8 +43,8 @@ func main() {
 
 	filename := args[0]
 	numberOfResults, _ := strconv.Atoi(args[1])
-	heap.Init(maxHeap)
-
-	processFile(filename, numberOfResults, maxHeap)
+	fmt.Println(filename)
+	fmt.Println(numberOfResults)
+	fmt.Println(top.Size)
 
 }
