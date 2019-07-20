@@ -19,7 +19,7 @@ func main() {
 	filename := args[0]
 	numberOfResults, _ := strconv.Atoi(args[1])
 
-	top := top.NewTop(numberOfResults)
+	top, _ := top.NewTop(numberOfResults)
 	fmt.Println(filename)
 	fmt.Println(numberOfResults)
 	fmt.Println(top.Size)
