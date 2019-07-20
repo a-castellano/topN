@@ -24,4 +24,9 @@ func main() {
 	fmt.Println(numberOfResults)
 	fmt.Println(top.Size)
 
+	fmt.Println(top.ShowMax())
+	top.Push(3)
+	top.Push(2)
+	top.Push(7)
+	fmt.Println(top.ShowMax())
 }
