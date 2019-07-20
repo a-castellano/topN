@@ -11,4 +11,4 @@ tests:
       - ln -s $CI_PROJECT_DIR
       - cd $CI_PROJECT_NAME
     script:
-      - go test -short $(go list ./... | grep -v /vendor/)
+      - go test ./...
