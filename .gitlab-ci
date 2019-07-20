@@ -1,0 +1,8 @@
+stages:
+    - test
+
+tests:
+    stage: test
+    image: daedalusproject/base_deb_golang_builder
+    script:
+      - ls
