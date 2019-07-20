@@ -62,5 +62,4 @@ func TestShowWithPush(t *testing.T) {
 	if max != 4 {
 		t.Errorf("Max element should be 4, not %d", max)
 	}
-
 }

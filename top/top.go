@@ -33,3 +33,23 @@ func (t *TopN) ShowMax() (int, error) {
 	}
 	return (*t.Heap)[0], nil
 }
+
+func (t *TopN) PopElements() []int {
+	var elements []int
+	var elementsToPop int
+	var heapLen int = (*t.Heap).Len()
+
+	if heapLen == 0 {
+		return elements
+	} else {
+		if heapLen < t.Size {
+			elementsToPop = heapLen
+		} else {
+			elementsToPop = t.Size
+		}
+	}
+	for i := 0; i < elementsToPop; i++ {
+		elements = append(elements, heap.Pop(t.Heap).(int))
+	}
+	return elements
+}
