@@ -12,7 +12,7 @@ import (
 type IntHeap []int
 
 func (h IntHeap) Len() int           { return len(h) }
-func (h IntHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h IntHeap) Less(i, j int) bool { return h[i] > h[j] }
 func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
 func (h *IntHeap) Push(x interface{}) {
@@ -29,7 +29,7 @@ func (h *IntHeap) Pop() interface{} {
 	return x
 }
 
-func getResults(filename string, numberOfResults int, minHeap *IntHeap) {
+func processFile(filename string, numberOfResults int, maxHeap *IntHeap) {
 
 	fmt.Println(filename)
 	fmt.Println(numberOfResults)
@@ -43,19 +43,19 @@ func getResults(filename string, numberOfResults int, minHeap *IntHeap) {
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		number, _ := strconv.Atoi(scanner.Text())
-		heap.Push(minHeap, number)
+		heap.Push(maxHeap, number)
 	}
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("minimum: %d\n", (*minHeap)[0])
+	fmt.Printf("maximum: %d\n", (*maxHeap)[0])
 
 }
 
 func main() {
 
 	args := os.Args[1:]
-	minHeap := &IntHeap{}
+	maxHeap := &IntHeap{}
 
 	if len(args) != 2 {
 		log.Fatal("You must supply a file to process and a number of results to display.")
@@ -63,8 +63,8 @@ func main() {
 
 	filename := args[0]
 	numberOfResults, _ := strconv.Atoi(args[1])
-	heap.Init(minHeap)
+	heap.Init(maxHeap)
 
-	getResults(filename, numberOfResults, minHeap)
+	processFile(filename, numberOfResults, maxHeap)
 
 }
