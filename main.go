@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/a-castellano/topN/top"
 	"log"
@@ -20,13 +21,23 @@ func main() {
 	numberOfResults, _ := strconv.Atoi(args[1])
 
 	top, _ := top.NewTop(numberOfResults)
-	fmt.Println(filename)
-	fmt.Println(numberOfResults)
-	fmt.Println(top.Size)
 
-	fmt.Println(top.ShowMax())
-	top.Push(3)
-	top.Push(2)
-	top.Push(7)
-	fmt.Println(top.ShowMax())
+	file, err := os.Open(filename)
+	defer file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		number, _ := strconv.Atoi(scanner.Text())
+		top.Push(number)
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	for _, element := range top.PopElements() {
+		fmt.Println(element)
+	}
 }
