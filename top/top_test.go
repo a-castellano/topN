@@ -108,6 +108,7 @@ func TestPopMoreElementsThanSize(t *testing.T) {
 	top.Push(2)
 	top.Push(3)
 	top.Push(4)
+	top.Push(1)
 	top.Push(5)
 	top.Push(6)
 	top.Push(7)
