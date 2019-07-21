@@ -162,7 +162,7 @@ func TestActualSizeLessElementsThanSize(t *testing.T) {
 	}
 
 	if top.Heap.Len() != 3 {
-		t.Errorf("After pushing more than thoushandselements, topN should maintain only 3 elements, it hasn't.")
+		t.Errorf("After pushing more than thousand elements, topN should maintain only 3 elements, it has %d", top.Heap.Len())
 	}
 
 	elements := top.PopElements()

@@ -26,7 +26,10 @@ func NewTop(size int) (*TopN, error) {
 func (t *TopN) Push(item int) {
 	heap.Push(t.Heap, item)
 	if t.Heap.Len() > t.Size {
-		heap.Remove(t.Heap, t.Size-1)
+		elements := t.PopElements()
+		for i := 0; i < t.Size; i++ {
+			heap.Push(t.Heap, elements[i])
+		}
 	}
 }
 
