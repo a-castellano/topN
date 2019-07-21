@@ -130,3 +130,26 @@ func TestPopMoreElementsThanSize(t *testing.T) {
 	}
 
 }
+
+func TestActualSizeLessElementsThanSize(t *testing.T) {
+	top, _ := NewTop(3)
+	if top.Heap.Len() != 0 {
+		t.Errorf("Empty topN should have 0 elements, it hasn't.")
+	}
+	top.Push(1)
+	if top.Heap.Len() != 1 {
+		t.Errorf("After pushing one element topN should have 1 elements, it hasn't.")
+	}
+	top.Push(1)
+	if top.Heap.Len() != 2 {
+		t.Errorf("After pushing second element topN should have 2 elements, it hasn't.")
+	}
+	top.Push(1)
+	if top.Heap.Len() != 3 {
+		t.Errorf("After pushing third element topN should have 3 elements, it hasn't.")
+	}
+	top.Push(1)
+	if top.Heap.Len() != 3 {
+		t.Errorf("After pushing more than three elements, topN should maintain only 3 elements, it hasn't.")
+	}
+}
