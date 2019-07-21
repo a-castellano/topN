@@ -25,6 +25,9 @@ func NewTop(size int) (*TopN, error) {
 
 func (t *TopN) Push(item int) {
 	heap.Push(t.Heap, item)
+	if t.Heap.Len() > t.Size {
+		heap.Remove(t.Heap, t.Size-1)
+	}
 }
 
 func (t *TopN) ShowMax() (int, error) {

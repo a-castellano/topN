@@ -108,6 +108,7 @@ func TestPopMoreElementsThanSize(t *testing.T) {
 	top.Push(2)
 	top.Push(3)
 	top.Push(4)
+	top.Push(1)
 	top.Push(5)
 	top.Push(6)
 	top.Push(7)
@@ -128,4 +129,43 @@ func TestPopMoreElementsThanSize(t *testing.T) {
 		t.Errorf("PopElements second element should be 9, not %d.", elements[1])
 	}
 
+}
+
+func TestActualSizeLessElementsThanSize(t *testing.T) {
+	top, _ := NewTop(3)
+
+	if top.Heap.Len() != 0 {
+		t.Errorf("Empty topN should have 0 elements, it hasn't.")
+	}
+	top.Push(1)
+	if top.Heap.Len() != 1 {
+		t.Errorf("After pushing one element topN should have 1 elements, it hasn't.")
+	}
+
+	top.Push(1)
+	if top.Heap.Len() != 2 {
+		t.Errorf("After pushing second element topN should have 2 elements, it hasn't.")
+	}
+
+	top.Push(1)
+	if top.Heap.Len() != 3 {
+		t.Errorf("After pushing third element topN should have 3 elements, it hasn't.")
+	}
+
+	top.Push(1)
+	if top.Heap.Len() != 3 {
+		t.Errorf("After pushing more than three elements, topN should maintain only 3 elements, it hasn't.")
+	}
+	for i := 0; i < 1000; i++ {
+		top.Push(i)
+	}
+
+	if top.Heap.Len() != 3 {
+		t.Errorf("After pushing more than thoushandselements, topN should maintain only 3 elements, it hasn't.")
+	}
+
+	elements := top.PopElements()
+	if elements[0] != 999 {
+		t.Errorf("PopElements first element should be 999, not %d.", elements[0])
+	}
 }
