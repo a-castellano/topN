@@ -26,7 +26,20 @@ func NewTop(size int) (*TopN, error) {
 func (t *TopN) Push(item int) {
 	heap.Push(t.Heap, item)
 	if t.Heap.Len() > t.Size {
-		heap.Remove(t.Heap, t.Size-1)
+		// Look for minimum element inside heap
+		minValue, _ := t.ShowMax()
+		minPosition := -1
+		for position := 0; position < t.Heap.Len(); position++ {
+			value := (*t.Heap)[position]
+			if value <= minValue {
+				minValue = value
+				minPosition = position
+			}
+		}
+		heap.Remove(t.Heap, minPosition)
+		if minPosition < t.Size-1 {
+			heap.Fix(t.Heap, minPosition)
+		}
 	}
 }
 

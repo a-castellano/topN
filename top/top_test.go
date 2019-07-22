@@ -2,6 +2,7 @@ package top
 
 import "testing"
 import "math/rand"
+import "reflect"
 
 func TestConstructorSize0(t *testing.T) {
 
@@ -161,11 +162,40 @@ func TestActualSizeLessElementsThanSize(t *testing.T) {
 	}
 
 	if top.Heap.Len() != 3 {
-		t.Errorf("After pushing more than thoushandselements, topN should maintain only 3 elements, it hasn't.")
+		t.Errorf("After pushing more than thousand elements, topN should maintain only 3 elements, it has %d", top.Heap.Len())
 	}
 
 	elements := top.PopElements()
 	if elements[0] != 999 {
 		t.Errorf("PopElements first element should be 999, not %d.", elements[0])
 	}
+}
+
+func TestActualSizeLessElementsThanSizeWorks(t *testing.T) {
+
+	top, _ := NewTop(5)
+	top.Push(1)
+	top.Push(2)
+	top.Push(3)
+	top.Push(4)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+	top.Push(5)
+
+	elements := top.PopElements()
+	shouldElements := []int{5, 5, 5, 5, 5}
+	if !reflect.DeepEqual(elements, shouldElements) {
+		t.Errorf("Order is not working.")
+	}
+
 }
