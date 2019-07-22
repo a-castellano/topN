@@ -25,3 +25,9 @@ Time complexity could be O(MlogN) but not removing unnecessary elements from our
 First version of [Push](https://git.windmaker.net/a-castellano/topN/blob/ee95d764a6e804633ce705d0d174485a35cfd961/top/top.go#L26)  function was only adding new elements to the heap. The more elements file has the more memory our implementation would need, with large files this means unacceptable memory usage (my current Linux VM has only 1Gb RAM).
 
 For this reason, when heap's size reaches N, current **Push** version deletes minimum value contained inside heap for keeping N elements inside of it.
+
+## Future Improvements
+
+I should look for a data structure or heap interface that allows me to find heap's minimun value in less complexity than O(N).
+
+The following implementation spends around 45 seconds to find fist 70 elements inside 1.3Gb file. The execution of this program against 200Gb file will take more than 3 hours to finish. As memory use is enclosed and heap won't have more than N+1 elements large files can be split to parallelize our program execution and merge final heaps at the end.
